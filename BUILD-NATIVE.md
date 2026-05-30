@@ -1,4 +1,4 @@
-# Building SpicyCalc 3.0 as a React Native App
+# Building SpicyCalc 3.1 as a React Native App
 
 This guide is for Claude Code to convert the existing `SpicyCalc.html` into a native React Native iOS app with StoreKit 2 for a $6.99 lifetime in-app purchase.
 

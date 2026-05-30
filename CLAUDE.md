@@ -85,7 +85,7 @@ All init functions are wrapped in individual try-catch blocks so one failure doe
 Run math verification: all calculator formulas have been validated with 104+ automated tests covering real peptide protocols (BPC-157, Semaglutide, Tirzepatide, Ipamorelin, CJC-1295, TB-500, GHK-Cu).
 
 ## NATIVE APP BUILD (React Native → App Store)
-The plan is to rebuild SpicyCalc 3.0 as a native React Native iOS app with StoreKit 2 for a $6.99 lifetime in-app purchase. See **BUILD-NATIVE.md** for the complete guide.
+The plan is to rebuild SpicyCalc 3.1 as a native React Native iOS app with StoreKit 2 for a $6.99 lifetime in-app purchase. See **BUILD-NATIVE.md** for the complete guide.
 
 ### Conversion approach:
 1. Scaffold a React Native TypeScript project
