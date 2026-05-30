@@ -84,18 +84,20 @@ All init functions are wrapped in individual try-catch blocks so one failure doe
 ## Testing
 Run math verification: all calculator formulas have been validated with 104+ automated tests covering real peptide protocols (BPC-157, Semaglutide, Tirzepatide, Ipamorelin, CJC-1295, TB-500, GHK-Cu).
 
-## NATIVE APP BUILD (App Store)
-The plan is to ship this on the iOS App Store using Capacitor + StoreKit 2 for a $6.99 lifetime in-app purchase. See **BUILD-NATIVE.md** for the full step-by-step guide.
+## NATIVE APP BUILD (React Native → App Store)
+The plan is to rebuild SpicyCalc 3.0 as a native React Native iOS app with StoreKit 2 for a $6.99 lifetime in-app purchase. See **BUILD-NATIVE.md** for the complete guide.
 
-Key tasks when wrapping natively:
-1. Scaffold Capacitor project, copy SpicyCalc.html to www/index.html
-2. Install @revenuecat/purchases-capacitor (or @capgo/capacitor-native-purchases)
-3. Create non-consumable product `com.YOURNAME.spicycalc.lifetime` in App Store Connect
-4. Replace hardcoded prices (#pw-real-price, #pw-btn-price, #pw-anchor-price) with StoreKit priceString — REQUIRED, Apple rejects hardcoded prices
-5. Wire pwBuy() → Purchases.purchasePackage() → window._doUnlock()
-6. Wire pwRestore() → Purchases.restorePurchases() (Apple requires a Restore button)
-7. Make _checkAccess() verify the Apple entitlement, not just localStorage
-8. Remove shared unlock codes (_CODES array) for production
-9. Keep trial timer, calculators, tracking unchanged
+### Conversion approach:
+1. Scaffold a React Native TypeScript project
+2. Convert each HTML tab into a React Native screen component
+3. Use React Navigation (bottom tabs + stacks) for navigation
+4. Replace localStorage with AsyncStorage (same key names for compatibility)
+5. Extract all calculator math into src/utils/calculations.ts (MUST match exactly)
+6. Convert CSS variables into a ThemeContext with 5 theme objects
+7. Install react-native-purchases (RevenueCat) for StoreKit IAP
+8. Build PaywallModal with 3-day trial, anchor pricing, Restore button
+9. Fetch real price from StoreKit (NEVER hardcode $6.99 — Apple rejects this)
+10. Remove shared unlock codes before production submission
 
-The paywall already has these hooks ready: `window._doUnlock()`, `window.pwRestore()` stub, `#pw-real-price`/`#pw-btn-price`/`#pw-anchor-price` spans.
+### Key reference:
+SpicyCalc.html is the source of truth for ALL features, math, data structures, and UI layout. Every screen, every calculation, every data format must match.
